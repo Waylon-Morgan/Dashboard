@@ -24,8 +24,8 @@ const aURL = [
 // Dashboard items (12 placeholders)
 const aIMG = [
   ["RADAR", "https://radar.weather.gov/ridge/standard/CONUS-LARGE_loop.gif"],
-  ["LOCAL RADAR", "https://radar.weather.gov/ridge/standard/UPPERMISSVLY_loop.gif"],
-  ["NOAA D-RAP", "https://services.swpc.noaa.gov/images/animations/d-rap/global/d-rap/latest.png"],
+  ["LOCAL RADAR", "https://radar.weather.gov/ridge/standard/UPPERMISSVLY_loop.gif", "https://www.timeanddate.com/scripts/sunmap.php"],
+  ["NOAA D-RAP & Grey line", "https://services.swpc.noaa.gov/images/animations/d-rap/global/d-rap/latest.png"],
   ["ISS POSITION", "https://www.heavens-above.com/orbitdisplay.aspx?icon=iss&width=600&height=300&mode=M&satid=25544"],
   ["SATELLITE", "https://cdn.star.nesdis.noaa.gov/GOES16/GLM/CONUS/EXTENT3/GOES16-CONUS-EXTENT3-625x375.gif"],
   ["LOCAL SATELLITE", "https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/umv/GEOCOLOR/GOES16-UMV-GEOCOLOR-600x600.gif"],
