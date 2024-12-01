@@ -27,9 +27,9 @@ const aIMG = [
   ["LOCAL RADAR", "https://radar.weather.gov/ridge/standard/UPPERMISSVLY_loop.gif"],
   ["NOAA D-RAP & Grey line", "https://services.swpc.noaa.gov/images/animations/d-rap/global/d-rap/latest.png", "https://www.timeanddate.com/scripts/sunmap.php"],
   ["ISS POSITION", "https://www.heavens-above.com/orbitdisplay.aspx?icon=iss&width=600&height=300&mode=M&satid=25544"],
-  ["SATELLITE", "https://cdn.star.nesdis.noaa.gov/GOES16/GLM/CONUS/EXTENT3/GOES16-CONUS-EXTENT3-625x375.gif"],
+  ["NWS","https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=CONUS&element=t&n=4", "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=CONUS&element=windspd&n=4", "https://www.wpc.ncep.noaa.gov/heat_index_MAX/bchi_day3.gif", "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=CONUS&element=wx&n=4"],
   ["LOCAL SATELLITE", "https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/umv/GEOCOLOR/GOES16-UMV-GEOCOLOR-600x600.gif"],
-  ["LIGHTNING", "https://images.lightningmaps.org/blitzortung/america/index.php?animation=usa"],
+  ["Hazards", "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=CONUS&element=wwa&n=4", "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=CONUS&element=totalsnowamt&n=2"],
   ["LIGHTNING LOCAL", "https://www.blitzortung.org/en/Images/image_b_mn.png"],
   ["Forecast & Activity", "https://www.wpc.ncep.noaa.gov/noaa/noaa.gif", "https://www.spc.noaa.gov/exper/mesoanalysis/activity_loop.gif", "https://www.spc.noaa.gov/products/watch/validww.png", "https://www.spc.noaa.gov/products/exper/day4-8/day48prob.gif", "https://www.wpc.ncep.noaa.gov/threats/final/hazards_d3_7_contours.png", "https://www.wpc.ncep.noaa.gov/qpf/fill_94qwbg.gif"],
   ["Convective Outlook", "https://www.spc.noaa.gov/products/outlook/day1otlk_1300.gif", "https://www.spc.noaa.gov/products/outlook/day2otlk_0600.gif", "https://www.spc.noaa.gov/products/outlook/day3otlk_0730.gif", "https://www.spc.noaa.gov/products/exper/day4-8/day48prob.gif"],
@@ -38,8 +38,8 @@ const aIMG = [
 ];
 
 // Image rotation intervals (12 values matching the tiles)
-
 const tileDelay = [
-  5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 
-  5000, 5000, 5000, 5000
+  10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 
+  10000, 10000, 10000, 10000
 ];
+
