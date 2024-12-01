@@ -729,38 +729,55 @@ db   8D Y8b  d8 88 `88.   .88.   88         88    db   8D
       setRot();
     }
 
-    // This function update the time on the top bar
-    function updateTopBar() {
-      const now = new Date();
-      const localDate = now.toLocaleDateString("en-US", {
-        weekday: "long",
-        month: "long",
-        day: "numeric",
-      });
-      const localTime = now.toLocaleTimeString("en-US", {
-        hour12: false,
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-        timeZoneName: "short",
-      });
+// This function updates the time on the top bar
+function updateTopBar() {
+  const now = new Date();
 
-      const utcDate = now.toISOString().slice(0, 10);
-      const utcTime = now.toISOString().slice(11, 19) + " UTC";
+  // Local date and time (12-hour format)
+  const localDate = now.toLocaleDateString("en-US", {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+  });
+  const localTime = now.toLocaleTimeString("en-US", {
+    hour12: true, // 12-hour format
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    timeZoneName: "short",
+  });
 
-      const topBarLeft = document.getElementById("topBarLeft");
-      topBarLeft.textContent = `${localDate} - ${localTime}`;
-      const topBarCenter = document.getElementById("topBarCenter");
-      topBarCenter.textContent = topBarCenterText;
-      const topBarRight = document.getElementById("topBarRight");
-      topBarRight.textContent = `${utcDate} ${utcTime}`;
-    }
+  // Military (24-hour) time
+  const militaryTime = now.toLocaleTimeString("en-US", {
+    hour12: false, // 24-hour format
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+  });
 
-    // Update every second
-    setInterval(updateTopBar, 1000);
+  // UTC date in the format month-day-year
+  const utcMonth = now.getUTCMonth() + 1; // Months are 0-based, so we add 1
+  const utcDay = now.getUTCDate();
+  const utcYear = now.getUTCFullYear();
+  const utcDate = `${utcMonth < 10 ? '0' : ''}${utcMonth}-${utcDay < 10 ? '0' : ''}${utcDay}-${utcYear}`;
 
-    // Run the check when the application starts
-    checkForUpdates();
+  // UTC time
+  const utcTime = now.toISOString().slice(11, 19) + " UTC";
+
+  // Updating the top bar elements
+  const topBarLeft = document.getElementById("topBarLeft");
+  topBarLeft.textContent = `${localDate} - ${localTime}`;
+  
+  const topBarCenter = document.getElementById("topBarCenter");
+  topBarCenter.textContent = `${militaryTime} - ${topBarCenterText}`; // Update center with military time or any other dynamic text
+
+  const topBarRight = document.getElementById("topBarRight");
+  topBarRight.textContent = `${utcDate} ${utcTime}`;
+}
+
+// Update every second
+setInterval(updateTopBar, 1000);
+
   </script>
   <!--
 d8888b.  .d88b.  d8888b. db    db
@@ -807,7 +824,7 @@ Y8888P'  `Y88P'  Y8888D'    YP
         <div
           id="topBarCenter"
           class="child"
-          style="text-align: center; color: rgb(0, 119, 255)"
+          style="text-align: center; color: blanchedalmond)"
         >
           &nbsp;
         </div>
