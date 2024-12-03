@@ -729,7 +729,7 @@ db   8D Y8b  d8 88 `88.   .88.   88         88    db   8D
       setRot();
     }
 
-// This function updates the time on the top bar
+// This function updates the time and weather on the top bar
 function updateTopBar() {
   const now = new Date();
 
@@ -764,19 +764,81 @@ function updateTopBar() {
   // UTC time
   const utcTime = now.toISOString().slice(11, 19) + " UTC";
 
+   // Fetch weather data from OpenWeatherMap API
+  const lat = 42.604095; // Latitude for San Francisco (replace with your desired location)
+  const lon = -96.560405; // Longitude for San Francisco (replace with your desired location)
+  const apiKey = "1e4a689f0c2d8651793087380bd880c5"; // Replace with your OpenWeatherMap API key
+  const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`; // Metric units for Celsius
+
+  fetch(weatherUrl)
+    .then(response => response.json())
+    .then(data => {
+      // Log the entire API response for debugging
+      console.log(data); // This will show the raw data returned by the API
+
+      // Check if the data is valid and contains the expected fields
+      if (data && data.main && data.wind) {
+        let temperature = data.main.temp; // Temperature in Fahrenheit (or Celsius if not set)
+        let windSpeed = data.wind.speed; // Wind speed in m/s (we'll convert it to mph)
+        const windDirection = data.wind.deg; // Wind direction in degrees
+        const windDirectionStr = getWindDirection(windDirection); // Convert degrees to compass direction
+
+        // Convert temperature if it's in Celsius (API might return in Celsius by default)
+        if (data.main.temp_min && data.main.temp_max) {
+          temperature = convertToFahrenheit(data.main.temp); // Convert Celsius to Fahrenheit if needed
+        }
+
+        // Convert wind speed from m/s to mph (1 m/s = 2.237 mph)
+        const windSpeedMphConverted = convertToMph(windSpeed);
+
+        // Update the center top bar with military time and weather info
+        const topBarCenter = document.getElementById("topBarCenter");
+        topBarCenter.textContent = `${militaryTime} | ${temperature}°F | Wind: ${windSpeedMphConverted} mph ${windDirectionStr}`;
+      } else {
+        console.error("Error: Weather data is incomplete or not available.");
+      }
+    })
+    .catch(error => {
+      console.error("Error fetching weather data: ", error);
+    });
+
   // Updating the top bar elements
   const topBarLeft = document.getElementById("topBarLeft");
   topBarLeft.textContent = `${localDate} - ${localTime}`;
-  
-  const topBarCenter = document.getElementById("topBarCenter");
-  topBarCenter.textContent = `${militaryTime} - ${topBarCenterText}`; // Update center with military time or any other dynamic text
 
   const topBarRight = document.getElementById("topBarRight");
   topBarRight.textContent = `${utcDate} ${utcTime}`;
 }
 
+// Function to convert wind speed from m/s to mph
+function convertToMph(ms) {
+  return (ms * 2.237).toFixed(1); // Convert m/s to mph and round to 1 decimal
+}
+
+// Function to convert temperature from Celsius to Fahrenheit
+function convertToFahrenheit(celsius) {
+  return ((celsius * 9/5) + 32).toFixed(1); // Convert Celsius to Fahrenheit and round to 1 decimal
+}
+
+// Function to convert wind direction from degrees to compass direction
+function getWindDirection(deg) {
+  if (deg >= 0 && deg < 22.5) return "North";
+  if (deg >= 22.5 && deg < 67.5) return "North-East";
+  if (deg >= 67.5 && deg < 112.5) return "East";
+  if (deg >= 112.5 && deg < 157.5) return "South-East";
+  if (deg >= 157.5 && deg < 202.5) return "South";
+  if (deg >= 202.5 && deg < 247.5) return "South-West";
+  if (deg >= 247.5 && deg < 292.5) return "West";
+  if (deg >= 292.5 && deg < 337.5) return "North-West";
+  return "North";
+}
+
 // Update every second
 setInterval(updateTopBar, 1000);
+
+
+
+
 
   </script>
   <!--
@@ -824,7 +886,7 @@ Y8888P'  `Y88P'  Y8888D'    YP
         <div
           id="topBarCenter"
           class="child"
-          style="text-align: center; color: blanchedalmond)"
+          style="text-align: center; font-size: 12px; color: blanchedalmond)"
         >
           &nbsp;
         </div>
