@@ -793,7 +793,7 @@ function updateTopBar() {
 
         // Update the center top bar with military time and weather info
         const topBarCenter = document.getElementById("topBarCenter");
-        topBarCenter.textContent = `${militaryTime} | ${temperature}°F | Wind: ${windSpeedMphConverted} mph ${windDirectionStr}`;
+        topBarCenter.textContent = `${militaryTime} | ${temperature}°F | Wind:${windSpeedMphConverted} mph ${windDirectionStr}`;
       } else {
         console.error("Error: Weather data is incomplete or not available.");
       }
@@ -846,74 +846,74 @@ Y8888P'  `Y88P'  Y8888D'    YP
 
 
 -->
-  <body onload="start()">
-    <div id="iFrameContainer" class="iframe-container">
-      <iframe class="full-screen" id="FullScreen" src="" title="Zoom"></iframe>
-    </div>
+<body onload="start()">
+  <div id="iFrameContainer" class="iframe-container">
+    <iframe class="full-screen" id="FullScreen" src="" title="Zoom"></iframe>
+  </div>
 
-    <div id="imgZoom" class="img-zoom">
-      <img
-        class="image-large"
-        id="ImageLarge"
-        alt="pic"
-        ondblclick="larger(event);"
-        oncontextmenu="rotate(event);"
-      />
-    </div>
+  <div id="imgZoom" class="img-zoom">
+    <img
+      class="image-large"
+      id="ImageLarge"
+      alt="pic"
+      ondblclick="larger(event);"
+      oncontextmenu="rotate(event);"
+    />
+  </div>
 
-    <div id="myMenu" class="menu">
-      <!-- Left Menu container -->
-    </div>
+  <div id="myMenu" class="menu">
+    <!-- Left Menu container -->
+  </div>
 
-    <div id="myMenuR" class="menuR">
-      <!-- Right Menu container -->
-    </div>
+  <div id="myMenuR" class="menuR">
+    <!-- Right Menu container -->
+  </div>
 
-    <div id="defaultFrame" class="default-frame">
-      <div class="top-bar">
-        <div
-          id="topBarLeft"
-          class="child"
-          style="text-align: left; padding-left: 7px; color: blanchedalmond"
-        >
-          &nbsp;
-        </div>
-        <div
-          id="topBarCenter"
-          class="child"
-          style="text-align: center; font-size: 12px; color: blanchedalmond)"
-        >
-          &nbsp;
-        </div>
-        <div
-          id="topBarRight"
-          class="child"
-          style="text-align: right; padding-right: 5px; color: aquamarine"
-        >
-          &nbsp;
-        </div>
+  <div id="defaultFrame" class="default-frame">
+    <div class="top-bar" style="display: flex; justify-content: space-between; align-items: center; height: 40px;">
+      <div
+        id="topBarLeft"
+        class="child"
+        style="text-align: left; padding-left: 7px; color: blanchedalmond; flex-basis: 33%; background-color: #000000;"
+      >
+        &nbsp;
       </div>
-      <div id="dash" class="dashboard">
-        <!-- Images container -->
+      <div
+        id="topBarCenter"
+        class="child"
+        style="text-align: left; font-size: 30px; color: blanchedalmond; padding-top: 2px; flex-basis: 33%; background-color: #000000;"
+      >
+        &nbsp;
+      </div>
+      <div
+        id="topBarRight"
+        class="child"
+        style="text-align: right; padding-right: 5px; color: aquamarine; flex-basis: 33%; background-color: #000000;"
+      >
+        &nbsp;
       </div>
     </div>
+    <div id="dash" class="dashboard">
+      <!-- Images container -->
+    </div>
+  </div>
 
-    <div id="overlay" class="overlay">
-      <div class="close-btn" onclick="hideOverlay()">&#10006;</div>
-      <div class="overlay-content">
-        <div class="array-container">
-          <div class="array-title"><B>Menu Options:</B></div>
-          <div id="array1" class="array-content"></div>
-        </div>
-        <div class="array-container">
-          <div class="array-title"><B>Image Sources:</B></div>
-          <div id="array2" class="array-content"></div>
-        </div>
-        <div class="array-container">
-          <div class="array-title"><B>Development by:</B></div>
-          <div id="array3" class="array-content"></div>
-        </div>
+  <div id="overlay" class="overlay">
+    <div class="close-btn" onclick="hideOverlay()">&#10006;</div>
+    <div class="overlay-content">
+      <div class="array-container">
+        <div class="array-title"><B>Menu Options:</B></div>
+        <div id="array1" class="array-content"></div>
+      </div>
+      <div class="array-container">
+        <div class="array-title"><B>Image Sources:</B></div>
+        <div id="array2" class="array-content"></div>
+      </div>
+      <div class="array-container">
+        <div class="array-title"><B>Development by:</B></div>
+        <div id="array3" class="array-content"></div>
       </div>
     </div>
-  </body>
+  </div>
+</body>
 </html>
