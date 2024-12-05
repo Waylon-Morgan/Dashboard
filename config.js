@@ -10,7 +10,6 @@ const aURL = [
   ["add10d", "BACK", "#", "1"],
   ["add10d", "BACK", "#", "1", "R"],
   ["ff9100", "Refresh", "#", "1"],
-  ["0dd1a7", "Help", "#", "1"],
   ["FF000F", "NWS Alert", "https://alerts.weather.gov/search?zone=SDC127", "1.7"],
   ["2196F3", "Air Quality", "https://gispub.epa.gov/airnow/?forecastcontours=forecasttomorrow&tab=loops&xmin=-11587177.532531567&xmax=-9708661.125395574&ymin=4873567.469572606&ymax=5612254.910920352&showlegend=no", "1"],
   ["2196F3", "River Level", "https://water.noaa.gov/wfo/fsd#@=-96.782939,42.7355704,6.8942545&b=topographic&g=obsFcst,1!1!1!1!1!1!1!1!1!1!1!1!1!1!1!0!0!0!0!0,0.5,1!1!1!1!0,0,0&ab=0,0,#D94B4A,1,1,1,#cccccc,1,0,0,#B243B1,1,0,0,#98E09A,1&a=hydrologic,0.35&s=0,0,0.9,0.9&n=false,#72afe9,0.9,0,0.9,0,0.9&p=false,0.75,0,7,0,1,2024,12,4,0&d=0,0,1,1,1,1,1,1,#006EFF,1,#006EFF,1,#006EFF,1,#006EFF,1,#006EFF&q=wfo%3AFSD", "1", "R"],
