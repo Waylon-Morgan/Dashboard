@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Dashboard</title>
+	  
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="VA3HDL Ham Radio Dashboard">
@@ -35,6 +39,34 @@ db   8D    88       88    88booo. 88.     db   8D
 
 -->
     <style>
+/* Make images responsive */
+        .slide img {
+            width: 100%;  /* Images take up full width of the container */
+            height: auto; /* Maintain aspect ratio */
+            max-width: 100%; /* Prevent stretching */
+        }
+
+        /* Layout styling for slide containers */
+        .slides-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .slide {
+            margin: 10px;
+            width: 45%; /* Make sure the slides are flexible on smaller screens */
+            box-sizing: border-box;
+        }
+
+        /* On smaller screens, make each slide full width */
+        @media screen and (max-width: 768px) {
+            .slide {
+                width: 100%; /* Take up full width on smaller screens */
+            }
+        }
+
+	    
       body {
         background: black;
         font-size: 100%;
@@ -351,6 +383,32 @@ db   8D Y8b  d8 88 `88.   .88.   88         88    db   8D
   <script src="wheelzoom.js"></script>
   <script src="config.js"></script>
   <script>
+
+	    // Wait for the DOM to load before running the script to render slides
+        document.addEventListener('DOMContentLoaded', function() {
+            const slidesContainer = document.querySelector('.slides-container');
+
+            // Dynamically create each slide based on the data in aIMG
+            aIMG.forEach((slideData) => {
+                const slideElement = document.createElement('div');
+                slideElement.classList.add('slide');
+                
+                // Create anchor tag if a URL is present
+                const anchor = document.createElement('a');
+                anchor.href = slideData[1];  // Use the first URL as the link
+                anchor.target = '_blank';  // Open link in a new tab
+
+                // Create image element
+                const img = document.createElement('img');
+                img.src = slideData[1];  // Set the image source (first link)
+                img.alt = slideData[0];  // Use the first value (name) as alt text
+
+                anchor.appendChild(img);
+                slideElement.appendChild(anchor);
+                slidesContainer.appendChild(slideElement);
+            });
+        });
+	   <div class="slides-container"></div>
     // Configurable grid layout logic. Defaults to standard 4 columns by 3 rows if values are missing in config.js file.
     if (typeof layout_cols === 'undefined'){
       var layout_cols = 4;
