@@ -729,7 +729,7 @@ db   8D Y8b  d8 88 `88.   .88.   88         88    db   8D
       setRot();
     }
 
-// This function updates the time and weather on the top bar
+// This function updates the time and weather on the top bar removed     timeZoneName: "short",
 function updateTopBar() {
   const now = new Date();
 
@@ -744,7 +744,7 @@ function updateTopBar() {
     hour: "2-digit",
     minute: "2-digit",
     second: "2-digit",
-    timeZoneName: "short",
+
   });
 
   // Military (24-hour) time
@@ -830,7 +830,7 @@ function getWindDirection(deg) {
   if (deg >= 202.5 && deg < 247.5) return "SW";
   if (deg >= 247.5 && deg < 292.5) return "W";
   if (deg >= 292.5 && deg < 337.5) return "NW";
-  return "North";
+  return "N";
 }
 
 // Update every second
@@ -874,14 +874,14 @@ Y8888P'  `Y88P'  Y8888D'    YP
       <div
         id="topBarLeft"
         class="child"
-        style="text-align: left; padding-left: 7px; font-size: 27px; color: blanchedalmond; flex-basis: 33%; background-color: #000000;"
+        style="text-align: left; padding-left: 3px; font-size: 18px; color: blanchedalmond; flex-basis: 33%; background-color: #000000;"
       >
         &nbsp;
       </div>
       <div
         id="topBarCenter"
         class="child"
-       style="text-align: left; padding-left: 25px; color: blanchedalmond; padding-top: 2px; flex-basis: 33%; background-color: #000000;"
+        style="text-align: left; padding-left: 30px; color: blanchedalmond; padding-top: 2px; flex-basis: 33%; background-color: #000000;"
       >
         &nbsp;
       </div>
@@ -897,7 +897,7 @@ Y8888P'  `Y88P'  Y8888D'    YP
       <!-- Images container -->
     </div>
   </div>
-
+//-----------------------font-size: 30px; is for center size
   <div id="overlay" class="overlay">
     <div class="close-btn" onclick="hideOverlay()">&#10006;</div>
     <div class="overlay-content">
