@@ -729,7 +729,7 @@ db   8D Y8b  d8 88 `88.   .88.   88         88    db   8D
       setRot();
     }
 
-// This function updates the time and weather on the top bar removed     timeZoneName: "short",
+// This function updates the time and weather on the top bar
 function updateTopBar() {
   const now = new Date();
 
@@ -744,16 +744,13 @@ function updateTopBar() {
     hour: "2-digit",
     minute: "2-digit",
     second: "2-digit",
-
   });
 
-  // Military (24-hour) time
-  const militaryTime = now.toLocaleTimeString("en-US", {
-    hour12: false, // 24-hour format
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-  });
+  // Military (24-hour) time (using internal clock directly)
+  const hours = now.getHours(); // Get hours (0-23)
+  const minutes = now.getMinutes(); // Get minutes (0-59)
+  const seconds = now.getSeconds(); // Get seconds (0-59)
+  const militaryTime = `${padZero(hours)}:${padZero(minutes)}:${padZero(seconds)}`;
 
   // UTC date in the format month-day-year
   const utcMonth = now.getUTCMonth() + 1; // Months are 0-based, so we add 1
@@ -764,7 +761,28 @@ function updateTopBar() {
   // UTC time
   const utcTime = now.toISOString().slice(11, 19) + " UTC";
 
-   // Fetch weather data from OpenWeatherMap API
+  // Updating the top bar elements with military time and UTC time
+  const topBarLeft = document.getElementById("topBarLeft");
+  topBarLeft.textContent = `${localDate} - ${localTime}`;
+
+  const topBarRight = document.getElementById("topBarRight");
+  topBarRight.textContent = `${utcDate} ${utcTime}`;
+
+  // If there's no internet, display the last saved weather data
+  const savedWeatherData = localStorage.getItem("weatherData");
+  if (savedWeatherData) {
+    const weatherData = JSON.parse(savedWeatherData);
+    const topBarCenter = document.getElementById("topBarCenter");
+    topBarCenter.textContent = `${militaryTime} | ${weatherData.temperature}°F | Wind:${weatherData.windSpeed} mph ${weatherData.windDirection}`;
+  } else {
+    // No saved weather data, just show military time and "No Internet"
+    const topBarCenter = document.getElementById("topBarCenter");
+    topBarCenter.textContent = `${militaryTime} | No Internet Connection`;
+  }
+}
+
+// Function to fetch the weather data
+function fetchWeatherData() {
   const lat = 42.604095; // Latitude for San Francisco (replace with your desired location)
   const lon = -96.560405; // Longitude for San Francisco (replace with your desired location)
   const apiKey = "1e4a689f0c2d8651793087380bd880c5"; // Replace with your OpenWeatherMap API key
@@ -773,12 +791,11 @@ function updateTopBar() {
   fetch(weatherUrl)
     .then(response => response.json())
     .then(data => {
-      // Log the entire API response for debugging
-      console.log(data); // This will show the raw data returned by the API
+      console.log(data); // Debugging line to ensure we get data
 
       // Check if the data is valid and contains the expected fields
       if (data && data.main && data.wind) {
-        let temperature = data.main.temp; // Temperature in Fahrenheit (or Celsius if not set)
+        let temperature = data.main.temp; // Temperature in Celsius
         let windSpeed = data.wind.speed; // Wind speed in m/s (we'll convert it to mph)
         const windDirection = data.wind.deg; // Wind direction in degrees
         const windDirectionStr = getWindDirection(windDirection); // Convert degrees to compass direction
@@ -791,8 +808,21 @@ function updateTopBar() {
         // Convert wind speed from m/s to mph (1 m/s = 2.237 mph)
         const windSpeedMphConverted = convertToMph(windSpeed);
 
+        // Save weather data to localStorage
+        const weatherData = {
+          temperature: temperature,
+          windSpeed: windSpeedMphConverted,
+          windDirection: windDirectionStr,
+        };
+        localStorage.setItem("weatherData", JSON.stringify(weatherData));
+
         // Update the center top bar with military time and weather info
         const topBarCenter = document.getElementById("topBarCenter");
+        const now = new Date();
+        const hours = now.getHours();
+        const minutes = now.getMinutes();
+        const seconds = now.getSeconds();
+        const militaryTime = `${padZero(hours)}:${padZero(minutes)}:${padZero(seconds)}`;
         topBarCenter.textContent = `${militaryTime} | ${temperature}°F | Wind:${windSpeedMphConverted} mph ${windDirectionStr}`;
       } else {
         console.error("Error: Weather data is incomplete or not available.");
@@ -801,13 +831,11 @@ function updateTopBar() {
     .catch(error => {
       console.error("Error fetching weather data: ", error);
     });
+}
 
-  // Updating the top bar elements
-  const topBarLeft = document.getElementById("topBarLeft");
-  topBarLeft.textContent = `${localDate} - ${localTime}`;
-
-  const topBarRight = document.getElementById("topBarRight");
-  topBarRight.textContent = `${utcDate} ${utcTime}`;
+// Function to pad single-digit numbers with leading zero
+function padZero(num) {
+  return num < 10 ? "0" + num : num;
 }
 
 // Function to convert wind speed from m/s to mph
@@ -833,8 +861,13 @@ function getWindDirection(deg) {
   return "N";
 }
 
-// Update every second
+// Update the top bar every second (only for time)
 setInterval(updateTopBar, 1000);
+
+// Fetch weather data every 5 minutes (300,000 ms)
+setInterval(fetchWeatherData, 300000);
+
+
   </script>
   <!--
 d8888b.  .d88b.  d8888b. db    db
