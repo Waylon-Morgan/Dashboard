@@ -24,21 +24,103 @@ const aURL = [
 
 ];
 
+// Function to generate the URLs for each category
+function generateUrls(baseUrl, startIndex, endIndex) {
+  let urls = [];
+  for (let i = startIndex; i <= endIndex; i++) {
+    urls.push(`${baseUrl}&n=${i}`);
+  }
+  return urls;
+}
+
 // Dashboard items (12 placeholders)
 const aIMG = [
-  ["", "https://radar.weather.gov/ridge/standard/UPPERMISSVLY_loop.gif", "https://www.cpc.ncep.noaa.gov/products/predictions/threats/temp_probhazards_d8_14_contours.png", "https://www.cpc.ncep.noaa.gov/products/predictions/threats/precip_probhazards_d8_14_contours.png", "https://www.cpc.ncep.noaa.gov/products/predictions/threats/snow_probhazards_d8_14_contours.png", "https://www.cpc.ncep.noaa.gov/products/predictions/threats/wind_probhazards_d8_14_contours.png"],
-  ["Weather", "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=wx&n=1", "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=wx&n=2", "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=wx&n=3", "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=wx&n=4", "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=wx&n=5", "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=wx&n=6", "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=wx&n=7", "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=wx&n=8", "https://www.wpc.ncep.noaa.gov/noaa/noaa.gif"],
-  ["Hazards", "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=wwa&n=1", "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=wwa&n=2", "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=wwa&n=3", "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=wwa&n=4", "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=wwa&n=5", "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=wwa&n=6", "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=wwa&n=7", "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=wwa&n=8"],
-  ["Tornado & Severe Weather", "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=tornadoprob&n=1", "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=tornadoprob&n=2", "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=totalsvrprob&n=1", "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=totalsvrprob&n=2", "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=totalsvrprob&n=3"],
-  ["Tempurature", "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=t&n=1", "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=t&n=2", "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=t&n=3", "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=t&n=4", "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=t&n=5", "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=t&n=6", "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=t&n=7", "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=t&n=8"],
-  ["Precipitation Probobility", "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=pop12&n=1", "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=pop12&n=2"],
-  ["", "https://sd.cdn.iteris-atis.com/camera_images/CSDJNC/1/latest.jpg", "https://sd.cdn.iteris-atis.com/camera_images/CSDGYV/3/latest.jpg"],
-  ["LIGHTNING LOCAL", "https://www.blitzortung.org/en/Images/image_b_mn.png"],
-  ["Wind", "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=windspd&n=1", "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=windspd&n=2", "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=windspd&n=3", "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=windspd&n=4", "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=windspd&n=5", "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=windspd&n=6", "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=windspd&n=7", "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=windspd&n=8"],
-  ["Rain Total", "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=qpf&n=1", "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=qpf&n=2", "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=qpf&n=3", "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=qpf&n=4"],
-  ["Snow Total", "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=snowamt&n=1", "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=snowamt&n=2", "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=snowamt&n=3", "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=snowamt&n=4"],
-  ["", "https://www.hamqsl.com/solar101vhf.php", "https://www.heavens-above.com/orbitdisplay.aspx?icon=iss&width=600&height=300&mode=M&satid=25544", "https://www.timeanddate.com/scripts/sunmap.php"]
+  ["", 
+    "https://radar.weather.gov/ridge/standard/UPPERMISSVLY_loop.gif", 
+    "https://www.cpc.ncep.noaa.gov/products/predictions/threats/temp_probhazards_d8_14_contours.png", 
+    "https://www.cpc.ncep.noaa.gov/products/predictions/threats/precip_probhazards_d8_14_contours.png", 
+    "https://www.cpc.ncep.noaa.gov/products/predictions/threats/snow_probhazards_d8_14_contours.png", 
+    "https://www.cpc.ncep.noaa.gov/products/predictions/threats/wind_probhazards_d8_14_contours.png"
+  ],
+  ["Weather", 
+    ...generateUrls("https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=wx", 1, 17)
+  ],
+  ["Severe Weather Probability", 
+    "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=totalsvrprob&n=1", 
+    "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=totalsvrprob&n=2", 
+    "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=totalsvrprob&n=3"
+  ],
+  ["Hazards", 
+    "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=wwa&n=1", 
+    "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=wwa&n=2", 
+    "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=wwa&n=3", 
+    "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=wwa&n=4", 
+    "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=wwa&n=5", 
+    "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=wwa&n=6", 
+    "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=wwa&n=7", 
+    "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=wwa&n=8"
+  ],
+  ["Temperature", 
+    ...generateUrls("https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=t", 1, 17)
+  ],
+  ["Precipitation Probability", 
+    "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=pop12&n=1", 
+    "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=pop12&n=2", 
+    "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=pop12&n=3", 
+    "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=pop12&n=4", 
+    "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=pop12&n=5", 
+    "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=pop12&n=6", 
+    "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=pop12&n=7", 
+    "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=pop12&n=8", 
+    "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=pop12&n=9", 
+    "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=pop12&n=10", 
+    "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=pop12&n=11"
+  ],
+  ["Tornado Probability", 
+    "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=tornadoprob&n=1", 
+    "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=tornadoprob&n=2"
+  ],
+  ["LIGHTNING LOCAL", 
+    "https://www.blitzortung.org/en/Images/image_b_mn.png"
+  ],
+  ["Wind", 
+    ...generateUrls("https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=windspd", 1, 17)
+  ],
+  ["Rain Total", 
+    "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=qpf&n=1", 
+    "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=qpf&n=2", 
+    "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=qpf&n=3", 
+    "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=qpf&n=4", 
+    "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=qpf&n=5", 
+    "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=qpf&n=6", 
+    "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=qpf&n=7", 
+    "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=qpf&n=8", 
+    "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=qpf&n=9", 
+    "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=qpf&n=10", 
+    "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=qpf&n=11", 
+    "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=qpf&n=12", 
+    "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=qpf&n=13", 
+    "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=qpf&n=14"
+  ],
+  ["Snow Total", 
+    "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=snowamt&n=1", 
+    "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=snowamt&n=2", 
+    "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=snowamt&n=3", 
+    "https://graphical.weather.gov/GraphicalNDFD.php?width=515&timezone=CST&sector=NORTHPLAINS&element=snowamt&n=4"
+  ],
+  ["", 
+    "https://sd.cdn.iteris-atis.com/camera_images/CSDJNC/1/latest.jpg", 
+    "https://sd.cdn.iteris-atis.com/camera_images/CSDJNC/2/latest.jpg", 
+    "https://sd.cdn.iteris-atis.com/camera_images/CSDGYV/1/latest.jpg", 
+    "https://sd.cdn.iteris-atis.com/camera_images/CSDGYV/3/latest.jpg", 
+    "https://www.hamqsl.com/solar101vhf.php", 
+    "https://www.heavens-above.com/orbitdisplay.aspx?icon=iss&width=600&height=300&mode=M&satid=25544", 
+    "https://www.timeanddate.com/scripts/sunmap.php"
+  ]
 ];
+
+// Displaying URLs for testing
+console.log(aIMG);
 
 
 // Image rotation intervals (12 values matching the tiles)
